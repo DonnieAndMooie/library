@@ -1,1 +1,1 @@
-# library
+The aim of this project is to create a webpage on which users can add books to a library by entering the details into a form

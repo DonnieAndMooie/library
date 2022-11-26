@@ -1,3 +1,22 @@
+@font-face {
+    font-family: "roboto-slab";
+    src: url(fonts/RobotoSlab-VariableFont_wght.ttf);
+}
+
+body{
+    background-color: rgb(140, 165, 212);
+    display: grid;
+    grid-template-rows: 200px 1fr 100px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    justify-items: center;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    grid-row: 2;
+}
+
 .card{
     background-color: red;
     margin: 20px;
@@ -6,4 +25,64 @@
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
+}
+
+.new{
+    width: 500px;
+    height: 150px;
+    font-size: 40px;
+    grid-row: 3;
+    background-color: rgb(47, 94, 134);
+    color: white;
+    border: none;
+    margin-top: 20px;
+}
+
+.form-container{
+    background-color: yellow;
+    width: 50vw;
+    height: 50vh;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border: 3px solid black;
+}
+
+.hide{
+    display: none;
+}
+
+fieldset{
+    border: none;
+}
+
+form{
+    font-size: 22px;
+    display: grid;
+    grid-template-columns: 250px;
+    justify-items: center;
+    align-items: center;
+    font-family: "roboto-slab";
+}
+
+button{
+    grid-row: 2 / 3;
+}
+
+.close-container{
+    margin-left: auto;
+}
+
+h1{
+    font-size: 80px;
+    font-family: "roboto-slab";
+}
+
+.close{
+    background-color: white;
+    border-radius: 50px;
+    height: 25px;
+    border: none;
 }

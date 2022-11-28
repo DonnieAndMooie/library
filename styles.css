@@ -86,3 +86,11 @@ h1{
     height: 25px;
     border: none;
 }
+
+.removeBtn{
+    width: 100%;
+    background-color: rgb(109, 10, 10);
+    color: white;
+    font-weight: bold;
+    
+}

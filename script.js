@@ -30,6 +30,7 @@ addBookBtn.addEventListener("click", () =>{
     event.preventDefault()
     const newBook = new Book(title.value, author.value, pages.value, read.checked);
     addBookToLibrary(newBook);
+    formPopup();
     updateScreen()
 })
 function updateScreen(){
@@ -45,18 +46,31 @@ function updateScreen(){
         const cardAuthor = document.createElement("div");
         const cardPages = document.createElement("div");
         const cardRead = document.createElement("div");
+        const removeBtn = document.createElement("button")
         cardTitle.textContent = "TITLE: " + book.title;
         cardAuthor.textContent = "AUTHOR: " + book.author;
         cardPages.textContent = "PAGES: " + book.pages;
         cardRead.textContent = "READ: " + book.read;
+        removeBtn.textContent = "Remove";
+        removeBtn.classList.add("removeBtn")
+        let indexValue = myLibrary.indexOf(book)
+        removeBtn.setAttribute("index", indexValue)
+        removeBtn.classList.add("removeBtn")
         bookCard.appendChild(cardTitle);
         bookCard.appendChild(cardAuthor);
         bookCard.appendChild(cardPages);
         bookCard.appendChild(cardRead);
-}
-    formPopup()
-    clearInputs()
-}
+        bookCard.appendChild(removeBtn);
+        }
+    
+    removeCards()
+    
+    
+        
+    }
+
+    
+
 
 newBook.addEventListener("click", formPopup)
 
@@ -70,9 +84,22 @@ function formPopup(){
     else{
         formContainer.classList.add("hide")
     }
+    clearInputs()
 }
 
 function clearInputs(){
     form.reset()
 }
+
+function removeCards(){
+    const removeBtns = document.querySelectorAll(".removeBtn");
+    for (btn of removeBtns){
+        let deleteIndex = btn.getAttribute("index")
+        btn.addEventListener("click", () => {
+        myLibrary.splice(deleteIndex, 1)
+        updateScreen()
+    })
+}
+}
+
 updateScreen()

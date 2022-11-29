@@ -13,17 +13,80 @@ function Book(title, author, pages, read){
     this.read = read;
 }
 
+Book.prototype.toggleRead = function(){
+    if (this.read === true){
+        this.read = false
+    }
+    else {
+        this.read = true
+    }
+    }
+
+
+Book.prototype.createCard = function (){
+    const bookCard = document.createElement("div");
+    bookCard.classList.add("card");
+    const cardTitle = document.createElement("div");
+    const cardAuthor = document.createElement("div");
+    const cardPages = document.createElement("div");
+    const readBtn = document.createElement("button");
+    const removeBtn = document.createElement("button")
+    cardTitle.textContent = "TITLE: " + this.title;
+    cardAuthor.textContent = "AUTHOR: " + this.author;
+    cardPages.textContent = "PAGES: " + this.pages;
+    removeBtn.textContent = "Remove";
+    removeBtn.classList.add("removeBtn")
+    readBtn.classList.add("readBtn")
+    let indexValue = myLibrary.indexOf(this)
+    removeBtn.setAttribute("index", indexValue)
+    readBtn.setAttribute("index", indexValue)
+    this.index = indexValue
+    removeBtn.classList.add("removeBtn")
+    bookCard.appendChild(cardTitle);
+    bookCard.appendChild(cardAuthor);
+    bookCard.appendChild(cardPages);
+    bookCard.appendChild(readBtn);
+    bookCard.appendChild(removeBtn);
+
+    if (this.read === true){
+        readBtn.textContent = "Read"
+        readBtn.classList.add("read")
+    }
+    else{
+        readBtn.textContent = "Not Read"
+    }
+
+
+    readBtn.addEventListener("click", (e) =>{
+        if (this.read === true){
+            this.read = false
+            readBtn.classList.remove("read")
+            readBtn.textContent = "Not Read"
+        }
+
+        else{
+            this.read = true
+            readBtn.textContent = "Read";
+            readBtn.classList.add("read");
+        }
+    
+})
+    return bookCard
+}
+
+
+
 function addBookToLibrary(book){
     myLibrary.push(book)
 }
 
-const hp = new Book("harry potter", "jk rowling", 453, "yes");
+const hp = new Book("Harry Potter", "JK Rowling", 453, false);
 addBookToLibrary(hp)
 
-const hobbit = new Book("hobbit", "tolkein", 363, "no")
+const hobbit = new Book("Hobbit", "Tolkein", 363, false)
 addBookToLibrary(hobbit)
 
-const test = new Book("test", "random guy", 374, "yes")
+const test = new Book("Test", "Random Guy", 374, true)
 addBookToLibrary(test)
 
 addBookBtn.addEventListener("click", () =>{
@@ -37,40 +100,16 @@ function updateScreen(){
     while (container.firstChild){
         container.removeChild(container.lastChild)
     }
-    
-    for (book of myLibrary){
-        const bookCard = document.createElement("div");
-        bookCard.classList.add("card");
+
+    for (const book of myLibrary){
+        const bookCard = book.createCard()
         container.appendChild(bookCard);
-        const cardTitle = document.createElement("div");
-        const cardAuthor = document.createElement("div");
-        const cardPages = document.createElement("div");
-        const cardRead = document.createElement("div");
-        const removeBtn = document.createElement("button")
-        cardTitle.textContent = "TITLE: " + book.title;
-        cardAuthor.textContent = "AUTHOR: " + book.author;
-        cardPages.textContent = "PAGES: " + book.pages;
-        cardRead.textContent = "READ: " + book.read;
-        removeBtn.textContent = "Remove";
-        removeBtn.classList.add("removeBtn")
-        let indexValue = myLibrary.indexOf(book)
-        removeBtn.setAttribute("index", indexValue)
-        removeBtn.classList.add("removeBtn")
-        bookCard.appendChild(cardTitle);
-        bookCard.appendChild(cardAuthor);
-        bookCard.appendChild(cardPages);
-        bookCard.appendChild(cardRead);
-        bookCard.appendChild(removeBtn);
+        }
+    removeCards()
         }
     
-    removeCards()
     
     
-        
-    }
-
-    
-
 
 newBook.addEventListener("click", formPopup)
 
@@ -93,7 +132,7 @@ function clearInputs(){
 
 function removeCards(){
     const removeBtns = document.querySelectorAll(".removeBtn");
-    for (btn of removeBtns){
+    for (const btn of removeBtns){
         let deleteIndex = btn.getAttribute("index")
         btn.addEventListener("click", () => {
         myLibrary.splice(deleteIndex, 1)
@@ -101,5 +140,7 @@ function removeCards(){
     })
 }
 }
+
+
 
 updateScreen()

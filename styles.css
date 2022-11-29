@@ -94,3 +94,17 @@ h1{
     font-weight: bold;
     
 }
+
+button.read{
+    width: 100%;
+    background-color: rgb(15, 235, 15);
+    color: white;
+    font-weight: bold;
+}
+
+.readBtn{
+    width: 100%;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}

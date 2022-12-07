@@ -6,25 +6,26 @@ const closeBtn = document.querySelector(".close");
 const addBookBtn = document.querySelector(".submit")
 const form = document.querySelector(".form")
 
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
 
-Book.prototype.toggleRead = function(){
-    if (this.read === true){
-        this.read = false
-    }
-    else {
-        this.read = true
-    }
+class Book{
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
 
+    toggleRead(){
+        if (this.read === true){
+            this.read = false
+        }
+        else {
+            this.read = true
+        }
+    }
 
-Book.prototype.createCard = function (){
-    const bookCard = document.createElement("div");
+    createCard(){
+        const bookCard = document.createElement("div");
     bookCard.classList.add("card");
     const cardTitle = document.createElement("div");
     const cardAuthor = document.createElement("div");
@@ -72,8 +73,8 @@ Book.prototype.createCard = function (){
     
 })
     return bookCard
+    }
 }
-
 
 
 function addBookToLibrary(book){
@@ -140,7 +141,6 @@ function removeCards(){
     })
 }
 }
-
 
 
 updateScreen()
